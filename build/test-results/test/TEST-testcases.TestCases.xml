@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="testcases.TestCases" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-05-02T13:02:09" hostname="LAKESH-LAPTOP" time="75.743">
+  <properties/>
+  <testcase name="testCase01" classname="testcases.TestCases" time="13.914"/>
+  <testcase name="testCase02" classname="testcases.TestCases" time="10.557"/>
+  <testcase name="testCase03" classname="testcases.TestCases" time="8.24"/>
+  <testcase name="testCase04" classname="testcases.TestCases" time="14.666"/>
+  <testcase name="testCase05[0](Movies)" classname="testcases.TestCases" time="13.558"/>
+  <testcase name="testCase05[1](Music)" classname="testcases.TestCases" time="6.405"/>
+  <testcase name="testCase05[2](Games)" classname="testcases.TestCases" time="6.601"/>
+  <system-out><![CDATA[Start of testCase01
+About YouTube
+Our mission is to give everyone a voice and show them the world.
+We believe that everyone deserves to have a voice, and that the world is a better place when we listen, share and build community through our stories.
+
+testCase01 Passed
+End of testCase01
+Start of testCase02
+testCase02 Passed
+End of testCase02
+Start of testCase03
+Playlist Name : Bollywood Dance Hitlist
+testCase03 Passed
+End of testCase03
+Start of testCase04
+News 1 : 'रोहित शर्मा को ड्रॉप करो', मोहम्मद कैफ ने हिटमैन की आलोचना करने वालों को जमकर सुनाया, कहा - उसका लास्ट मैच... https://hindi.thesportstak.com/cricke... 'रोहित शर्मा को ड्रॉप करो', मोहम्मद कैफ ने हिटमैन की आलोचना करने वालों को जमकर सुनाया, कहा - उसका लास्ट मैच... https://hindi.thesportstak.com/cricke... 
+Likes : 0
+News 2 : Asia Cup 2025 in Trouble? Asia Cup 2025 Future in Doubt Over India-Pakistan Stand-Off ]]>&#x1f62e;<![CDATA[]]>&#x1f3cf;<![CDATA[ #PahalgamTerroristAttack #AsiaCup #AsiaCup2025 #India #Pakistan#INDvsPAK Asia Cup 2025 in Trouble? Asia Cup 2025 Future in Doubt Over India-Pakistan Stand-Off ]]>&#x1f62e;<![CDATA[]]>&#x1f3cf;<![CDATA[ #PahalgamTerroristAttack  #AsiaCup  #AsiaCup2025  #India  #Pakistan  #INDvsPAK 
+Likes : 2
+News 3 : वक्फ कानून के खिलाफ अनोखा विरोध, 'बत्ती गुल्ल' आंदोलन के चलते काट डाली पूरे गाँव की लाइट, कर्मचारी बर्खास्त.. https://www.newsnasha.com/meerut-waqf...#MeerutNews#WaqfBillProtest वक्फ कानून के खिलाफ अनोखा विरोध, 'बत्ती गुल्ल' आंदोलन के चलते काट डाली पूरे गाँव की लाइट, कर्मचारी बर्खास्त.. https://www.newsnasha.com/meerut-waqf...  #MeerutNews  #WaqfBillProtest                     
+Likes : 13
+News 4 : The Calcutta High Court has asked the Kolkata Police Commissioner to submit a report on the heckling of lawyers. For More Details Visit: https://lawchakra.in/high-court/calcu... The Calcutta High Court has asked the Kolkata Police Commissioner to submit a report on the heckling of lawyers. For More Details Visit: https://lawchakra.in/high-court/calcu...             
+Likes : 5
+News 5 : Mudda To Hai : 'लव जिहाद' बर्दाश्त नहीं देखिए 'मुद्दा तो है' आज शाम 6:30 बजे सिर्फ Zee MPCG पर... #MuddatoHai #LoveJihad #Bhopal #MPNews #ZeeMPCG Mudda To Hai : 'लव जिहाद' बर्दाश्त नहीं देखिए 'मुद्दा तो है' आज शाम 6:30 बजे सिर्फ Zee MPCG पर... #MuddatoHai  #LoveJihad  #Bhopal  #MPNews  #ZeeMPCG 
+Likes : 1
+News 6 : पंजाब से पानी विवाद पर सैनी सरकार ने बुलाई सर्वदलीय मीटिंग कल 2 बजे चंडीगढ़ में होगी बैठक पूर्व मुख्यमंत्री भूपेंद्र सिंह हुड्डा ने की विशेष सत्र बुलाने की मांग #HaryanaNews पंजाब से पानी विवाद पर सैनी सरकार ने बुलाई सर्वदलीय मीटिंग कल 2 बजे चंडीगढ़ में होगी बैठक पूर्व मुख्यमंत्री भूपेंद्र सिंह हुड्डा ने की विशेष सत्र बुलाने की मांग #HaryanaNews     
+Likes : 18
+testCase04 Passed
+End of testCase04
+Fetching excel file from D:\Selenium Projects\build out\lakeshsahu22-ME_QA_XYOUTUBE_SEARCH/src/test/resources/data.xlsx
+Reading data
+2025-05-02T13:02:57.088813800Z Test worker ERROR Log4j API could not find a logging provider.
+Here is the data: [[Ljava.lang.Object;@63884e4, [Ljava.lang.Object;@524270b8, [Ljava.lang.Object;@4acb7ecc]
+Start of testCase05
+testCase05 Passed
+End of testCase05
+Start of testCase05
+testCase05 Passed
+End of testCase05
+Start of testCase05
+testCase05 Passed
+End of testCase05
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
