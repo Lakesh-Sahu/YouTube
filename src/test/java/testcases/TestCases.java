@@ -1,218 +1,148 @@
 package testcases;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-import utils.DriverFactory;
-import utils.ExcelDataProvider;
-import wrappers.Wrappers;
+import utility.Base;
+import utility.ContextManager;
+import utility.ExcelDataProvider;
+import utility.ObjectContext;
 
-public class TestCases extends Wrappers {
-    ChromeDriver driver;
+import static org.testng.Assert.*;
 
-    /*
-    Go to https://www.youtube.com/ and Assert user is on the correct URL.
-    Click on "About" at the bottom of the sidebar, and print the message on the screen.
-    */
-    @Test(enabled = true)
+public class TestCases extends Base {
+
+    @Test(enabled = true, description = "Go to https://www.youtube.com/ and Assert user is on the correct URL. Click on 'About' at the bottom of the sidebar, verify that it contains some message.")
     public void testCase01() {
+        ObjectContext oc = ContextManager.getContext();
 
-        try {
-            System.out.println("Start of testCase01");
+        // Opening YouTube url
+        assertTrue(oc.home.navigateToHome(), "User is able to open url");
 
-            // Opening YouTube url
-            Assert.assertTrue(openUrl(), "User is unable to open url");
+        // Asserting that user is on landing on correct url
+        assertEquals(oc.cm.getCurrentUrl(), "https://www.youtube.com/", "User is on https://www.youtube.com/ page");
 
-            // Asserting that user is on landing on correct url
-            Assert.assertEquals(getUrl(), "https://www.youtube.com/", "User is not on https://www.youtube.com/ page");
+        // Clicking on "About" button
+        assertTrue(oc.home.clickAboutButton(), "User is able to click about button");
 
-            // Clicking on "About" button
-            Assert.assertTrue(clickAboutButton(), "User is unable to click about button");
+        assertTrue(oc.about.verifyOnAboutPage(), "User is on about page");
 
-            // Waiting for about content to show to confirm page is open fully
-            Assert.assertTrue(waitForAboutToLoad(), "User is unable to see the About message on about page");
+        // Waiting for about content to show to confirm page is open fully
+        assertTrue(oc.about.waitForAboutToLoad(), "User is able to see the About message on about page");
 
-            // Asserting that we are on about page
-            Assert.assertTrue(compareContainsString(getUrl(), "about"), "User is not on about page");
+        // Asserting that we are on about page
+        assertTrue(oc.cm.compareContainsString(oc.cm.getCurrentUrl(), "about"), "User is on about page");
 
-            // Storing and printing the message shown on about page
-            List<WebElement> textElements = findElementsVisi("//section[@class='ytabout__content']/*");
-            for (WebElement message : textElements) {
-                System.out.println(message.getText());
-            }
-
-            System.out.println("testCase01 Passed");
-
-        } catch (Exception e) {
-            System.out.println("testCase01 Failed");
+        // Storing and verifying the message on about page
+        StringBuilder message = new StringBuilder();
+        List<WebElement> textElements = oc.cm.findElementsVisi("//section[@class='ytabout__content']/*");
+        for (WebElement currMessage : textElements) {
+           message.append(oc.cm.getText(currMessage)).append(" ");
         }
-        System.out.println("End of testCase01");
+        logInfoInExtentReport("About message contains some message : \"" + message.toString() + "\"");
+        assertTrue(!message.toString().isBlank(), "About message contains some message : \"" + message.toString() + "\"");
     }
 
-    /*
-     Go to the "Films" or "Movies" tab and in the “Top Selling” section, scroll
-     to the extreme right. Apply a Soft Assert on whether the movie is marked “A”
-     for Mature or not. Apply a Soft assert on the movie category to check if it
-     exists ex: "Comedy", "Animation", "Drama".
-     */
-    @Test(enabled = true)
+    @Test(enabled = true, description = "Go to the 'Films' or 'Movies' tab and in the 'Top Selling' section, scroll to the extreme right. Apply a Soft Assert on whether the movie is marked 'A' or 'U' or 'U/A' tag or not. Apply a Soft assert on the movie category to check if it exists ex: 'Comedy', 'Animation', 'Drama'.")
     public void testCase02() {
-        try {
-            System.out.println("Start of testCase02");
+        ObjectContext oc = ContextManager.getContext();
 
-            // Opening YouTube url
-            Assert.assertTrue(openUrl(), "User is unable to open url");
+        // Opening YouTube url
+        assertTrue(oc.home.navigateToHome(), "User is able to open url");
 
-            // Locating and clicking 'Movies' button
-            Assert.assertTrue(clickMobieBtn(), "User is unable to click movies button");
+        // Locating and clicking 'Movies' button
+        assertTrue(oc.home.clickMoviesBtn(), "User is able to click movies button");
 
-            // Locating and clicking the 'Next' button till it reaches last
-            Assert.assertTrue(clickingNextBtnInMovies(), "User is unable to click Next button in Movies section until it reaches last");
+        // Locating and clicking the 'Next' button till it reaches last
+        assertTrue(oc.movies.clickingNextBtnInMovies(), "User is able to click Next button in Movies section until it reaches last");
 
-            // Creating object of 'SoftAssert' class
-            SoftAssert sa = new SoftAssert();
+        // Creating object of 'SoftAssert' class
+        SoftAssert sa = new SoftAssert();
 
-            // Locating the age category text of last movie and asserting that it contains A or U/A
-            String lastMovieAgeRating = getLastMovieAgeRating();
-            sa.assertTrue(compareContainsString(lastMovieAgeRating, "A") || compareContainsString(lastMovieAgeRating, "U/A") || compareContainsString(lastMovieAgeRating, "U/A"), "Movies does not contain A or U or U/A age tag");
+        // Locating the age category text of last movie and asserting that it contains A or U/A
+        String lastMovieAgeRating = oc.movies.getLastMovieAgeRating();
+        logInfoInExtentReport("Last movie contains age tag of : '" + lastMovieAgeRating + "'");
+        sa.assertTrue(oc.cm.compareContainsString(lastMovieAgeRating, "A") || oc.cm.compareContainsString(lastMovieAgeRating, "U") || oc.cm.compareContainsString(lastMovieAgeRating, "U/A"), "Last movie contains age tag of '" + lastMovieAgeRating + "'");
 
-            // Locating that comedy, animation or any other category is present in the last movie
-            sa.assertNotEquals(getLastMovieCategory().length(), 0, "There is no category present in the last movie card");
+        // Locating that comedy, animation or any other category is present in the last movie
+        String lastMovieCategory = oc.movies.getLastMovieCategory();
+        logInfoInExtentReport("There is category present in the last movie card : '" + lastMovieCategory + "'");
+        sa.assertTrue(!lastMovieCategory.isBlank(), "There is category present in the last movie card : '" + lastMovieAgeRating + "'");
 
-            // Asserting all the soft assert
-            sa.assertAll();
-
-            System.out.println("testCase02 Passed");
-
-        } catch (Exception e) {
-            System.out.println("testCase02 Failed");
-        }
-        System.out.println("End of testCase02");
+        // Asserting all the soft assert
+        sa.assertAll();
     }
 
-    /*
-     Go to the "Music" tab and in the 1st section, scroll to the last content of 1st section.
-     Print the name of the playlist. Soft Assert on whether the number of tracks
-     listed is less than or equal to 50.
-     */
-    @Test(enabled = true)
+    @Test(enabled = true, description = "Go to the 'Music' tab and in the 1st section, scroll to the last content of 1st section. Verify it contains some playlist name. Soft Assert on whether the number of tracks listed is less than or equal to 50.")
     public void testCase03() {
-        try {
-            System.out.println("Start of testCase03");
+        ObjectContext oc = ContextManager.getContext();
 
-            // Creating object of 'SoftAssert'
-            SoftAssert sa = new SoftAssert();
+        // Creating object of 'SoftAssert'
+        SoftAssert sa = new SoftAssert();
 
-            // Opening 'YouTube' url
-            Assert.assertTrue(openUrl(), "User is unable to open url");
+        // Opening 'YouTube' url
+        assertTrue(oc.home.navigateToHome(), "User is able to open url");
 
-            // Locating and clicking 'Music' button
-            Assert.assertTrue(clickMusicBtn(), "User is unable to click Music button");
+        // Locating and clicking 'Music' button
+        assertTrue(oc.home.clickMusicBtn(), "User is able to click Music button");
 
-            // Locating 'Show more' button in the first section and clicking until it reaches last
-            Assert.assertTrue(clickingShowMoreBtn(), "User is unable to click show more button in Music section until it reaches last");
+        // Locating 'Show more' button in the first section and clicking until it reaches last
+        assertTrue(oc.music.clickingShowMoreBtn(), "User is able to click show more button in Music section until it reaches last");
 
-            // Locating, getting and printing the last playlist name
-            String lastMusicPlaylistName = getLastMusicPlaylistName();
-            Assert.assertNotNull(lastMusicPlaylistName, "Last Music playlist is null");
-            System.out.println("Playlist Name : " + lastMusicPlaylistName);
+        // Locating, getting and verifying the last playlist name
+        String lastMusicPlaylistName = oc.music.getLastMusicPlaylistName();
+        logInfoInExtentReport("Last Music playlist contains some name : \"" + lastMusicPlaylistName + "\"");
+        assertTrue(!lastMusicPlaylistName.isBlank(), "Last Music playlist contains some name : \"" + lastMusicPlaylistName + "\"");
 
-            // Soft Asserting that total track count is less than or equal to 50
-            int songCountOfFirstSectionLastPlaylist = getSongCountOfFirstSectionLastPlaylist();
-            sa.assertTrue(getSongCountOfFirstSectionLastPlaylist() <= 50, "Video Count is greater than 50 : " + songCountOfFirstSectionLastPlaylist);
+        // Soft Asserting that total track count is less than or equal to 50
+        int songCountOfFirstSectionLastPlaylist = oc.music.getSongCountOfFirstSectionLastPlaylist();
+        logInfoInExtentReport("Total video track count : " + songCountOfFirstSectionLastPlaylist);
+        sa.assertTrue(songCountOfFirstSectionLastPlaylist > 0 && songCountOfFirstSectionLastPlaylist <= 50, "Total video track count is greater than 0 and less than or equal to 50 : " + songCountOfFirstSectionLastPlaylist);
 
-            // Asserting all the soft assert
-            sa.assertAll();
-
-            System.out.println("testCase03 Passed");
-
-        } catch (Exception e) {
-            System.out.println("testCase03 Failed");
-        }
-        System.out.println("End of testCase03");
+        // Asserting all the soft assert
+        sa.assertAll();
     }
 
-    /*
-     Go to the "News" tab and print the title and body of the 1st 3 “Latest News
-     Posts” along with the sum of the number of likes on all 3 of them. No likes
-     given means 0.
-     */
-    @Test(enabled = true)
+    @Test(enabled = true, description = "Go to the 'News' tab and print the title and body of the 1st 3 'Latest News Posts' along with the sum of the number of likes on all 3 of them. No likes given means 0.")
     public void testCase04() {
-        try {
-            System.out.println("Start of testCase04");
+        ObjectContext oc = ContextManager.getContext();
 
-            // Opening 'YouTube' url
-            Assert.assertTrue(openUrl(), "User is unable to open url");
+        // Opening 'YouTube' url
+        assertTrue(oc.home.navigateToHome(), "User is able to open url");
 
-            // Asserting that user is on landing on correct url
-            Assert.assertEquals(getUrl(), "https://www.youtube.com/", "User is not on https://www.youtube.com/ page");
+        // Asserting that user is on landing on correct url
+        assertEquals(oc.cm.getCurrentUrl(), "https://www.youtube.com/", "User is on https://www.youtube.com/ page");
 
-            // Locating and clicking the 'News' button
-            Assert.assertTrue(clickNewsBtn(), "User is unable to click news button");
+        // Locating and clicking the 'News' button
+        assertTrue(oc.home.clickNewsBtn(), "User is able to click news button");
 
-            int numberOfNews = 3;
-            // Getting the Title, Body and number of likes in News cards
-            Assert.assertTrue(printTitleBodyLikesInLatestNewsPostCards(numberOfNews), "User is unable to see " + numberOfNews + " news in the latest news post");
-
-            System.out.println("testCase04 Passed");
-        } catch (Exception e) {
-            System.out.println("testCase04 Failed");
-        }
-        System.out.println("End of testCase04");
+        int numberOfNews = 3;
+        // Getting the Title, Body and number of likes in News cards
+        String allNewsTitleBodyLike = oc.news.getTitleBodyLikesInLatestNewsPostCards(numberOfNews);
+        logInfoInExtentReport("News in the latest news post :\n" + allNewsTitleBodyLike);
+        assertTrue(!allNewsTitleBodyLike.isBlank(), "User is able to see " + numberOfNews + " news in the latest news post");
     }
 
-    /*
-     Search for each of the items given in the stubs:
-     src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s
-     views reach 10 Cr.
-     */
-    @Test(enabled = true, dataProvider = "excelData", dataProviderClass = ExcelDataProvider.class)
+    @Test(enabled = true, dataProvider = "excelData", dataProviderClass = ExcelDataProvider.class, description = "Search for each of the items given in the stubs: src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s views reach 10 Cr.")
     public void testCase05(String text) {
-        try {
-            System.out.println("Start of testCase05");
+        ObjectContext oc = ContextManager.getContext();
 
-            // Opening 'YouTube' url
-            Assert.assertTrue(openUrl(), "User is unable to open url");
+        logInfoInExtentReport("Performing action for '" + text + "' from excel data");
 
-            // Asserting that user is on landing on correct url
-            Assert.assertEquals(getUrl(), "https://www.youtube.com/", "User is not on https://www.youtube.com/ page");
+        // Opening 'YouTube' url
+        assertTrue(oc.home.navigateToHome(), "User is able to open url");
 
-            // Searching for text provided by the dataProvider
-            Assert.assertTrue(search(text), "User is unable to search in the search box");
+        // Asserting that user is on landing on correct url
+        assertEquals(oc.cm.getCurrentUrl(), "https://www.youtube.com/", "User is on https://www.youtube.com/ page");
 
-            // Scrolling until total view count of videos is greater than or equal to the targetViewCount
-            long viewCount = 100000000L;
-            Assert.assertTrue(viewCount(viewCount), "User is unable to scroll until it reached " + viewCount + " view count");
+        // Searching for text provided by the dataProvider
+        assertTrue(oc.searchResult.search(text), "User is able to search in the search box");
 
-            System.out.println("testCase05 Passed");
-        } catch (Exception e) {
-            System.out.println("testCase05 Failed");
-        }
-        System.out.println("End of testCase05");
-    }
-
-    @BeforeTest
-    public void startBrowser() {
-        driver = DriverFactory.getDriver();
-        setDriverAndWait(driver, 15);
-    }
-
-    // Quiting the browser
-    @AfterTest
-    public void endTest() {
-        try {
-            driver.quit();
-            System.out.println("Quiting Complete");
-        } catch (Exception e) {
-            System.out.println("Quiting Failed");
-        }
+        // Scrolling until total view count of videos is greater than or equal to the targetViewCount
+        long viewCount = 100000000L;
+        assertTrue(oc.searchResult.scrollTillViewCount(viewCount), "User is able to scroll until it reached " + viewCount + " view count");
     }
 }

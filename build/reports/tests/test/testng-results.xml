@@ -2,32 +2,55 @@
 <testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-02T18:32:06 IST" name="Test Suite for Buildout" finished-at="2025-05-02T18:33:26 IST" duration-ms="79519">
+  <suite started-at="2025-05-23T02:09:18 IST" name="Test case suite for YouTube" finished-at="2025-05-23T02:10:25 IST" duration-ms="66565">
     <groups>
     </groups>
-    <test started-at="2025-05-02T18:32:06 IST" name="Test Cases for Buildout" finished-at="2025-05-02T18:33:26 IST" duration-ms="79519">
+    <test started-at="2025-05-23T02:09:18 IST" name="All Testcases" finished-at="2025-05-23T02:10:25 IST" duration-ms="66565">
       <class name="testcases.TestCases">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:32:06 IST" name="startBrowser" finished-at="2025-05-02T18:32:09 IST" duration-ms="2663" status="PASS">
+        <test-method is-config="true" signature="getBrowserName(java.lang.String)[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:18 IST" name="getBrowserName" finished-at="2025-05-23T02:09:18 IST" duration-ms="18" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startBrowser -->
-        <test-method signature="testCase01()[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:32:09 IST" name="testCase01" finished-at="2025-05-02T18:32:23 IST" duration-ms="13914" status="PASS">
+        </test-method> <!-- getBrowserName -->
+        <test-method is-config="true" signature="extentReportInitializer()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:18 IST" name="extentReportInitializer" finished-at="2025-05-23T02:09:18 IST" depends-on-methods="utility.Base.getBrowserName" duration-ms="285" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testCase01 -->
-        <test-method signature="testCase02()[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:32:23 IST" name="testCase02" finished-at="2025-05-02T18:32:33 IST" duration-ms="10557" status="PASS">
+        </test-method> <!-- extentReportInitializer -->
+        <test-method signature="testCase02()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:18 IST" name="testCase02" description="Go to the &#039;Films&#039; or &#039;Movies&#039; tab and in the &#039;Top Selling&#039; section, scroll to the extreme right. Apply a Soft Assert on whether the movie is marked &#039;A&#039; or &#039;U&#039; or &#039;U/A&#039; tag or not. Apply a Soft assert on the movie category to check if it exists ex: &#039;Comedy&#039;, &#039;Animation&#039;, &#039;Drama&#039;." finished-at="2025-05-23T02:09:45 IST" duration-ms="26313" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase02 -->
-        <test-method signature="testCase03()[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:32:33 IST" name="testCase03" finished-at="2025-05-02T18:32:42 IST" duration-ms="8240" status="PASS">
+        <test-method signature="testCase01()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:18 IST" name="testCase01" description="Go to https://www.youtube.com/ and Assert user is on the correct URL. Click on &#039;About&#039; at the bottom of the sidebar, verify that it contains some message." finished-at="2025-05-23T02:09:38 IST" duration-ms="20008" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase01 -->
+        <test-method signature="testCase03()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:18 IST" name="testCase03" description="Go to the &#039;Music&#039; tab and in the 1st section, scroll to the last content of 1st section. Verify it contains some playlist name. Soft Assert on whether the number of tracks listed is less than or equal to 50." finished-at="2025-05-23T02:09:43 IST" duration-ms="24528" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase03 -->
-        <test-method signature="testCase04()[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:32:42 IST" name="testCase04" finished-at="2025-05-02T18:32:56 IST" duration-ms="14666" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:39 IST" name="tearDown" finished-at="2025-05-23T02:09:39 IST" duration-ms="534" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="testCase04()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:39 IST" name="testCase04" description="Go to the &#039;News&#039; tab and print the title and body of the 1st 3 &#039;Latest News Posts&#039; along with the sum of the number of likes on all 3 of them. No likes given means 0." finished-at="2025-05-23T02:10:05 IST" duration-ms="25267" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase04 -->
-        <test-method signature="testCase05(java.lang.String)[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:32:58 IST" name="testCase05" data-provider="excelData" finished-at="2025-05-02T18:33:12 IST" duration-ms="13558" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:44 IST" name="tearDown" finished-at="2025-05-23T02:09:44 IST" duration-ms="445" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:45 IST" name="tearDown" finished-at="2025-05-23T02:09:48 IST" duration-ms="2542" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="testCase05(java.lang.String)[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:09:46 IST" name="testCase05" description="Search for each of the items given in the stubs: src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s views reach 10 Cr." data-provider="excelData" finished-at="2025-05-23T02:09:59 IST" duration-ms="13692" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -38,7 +61,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase05 -->
-        <test-method signature="testCase05(java.lang.String)[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:33:12 IST" name="testCase05" data-provider="excelData" finished-at="2025-05-02T18:33:18 IST" duration-ms="6405" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:00 IST" name="tearDown" finished-at="2025-05-23T02:10:00 IST" duration-ms="411" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="testCase05(java.lang.String)[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:00 IST" name="testCase05" description="Search for each of the items given in the stubs: src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s views reach 10 Cr." data-provider="excelData" finished-at="2025-05-23T02:10:12 IST" duration-ms="11996" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -49,7 +76,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase05 -->
-        <test-method signature="testCase05(java.lang.String)[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:33:18 IST" name="testCase05" data-provider="excelData" finished-at="2025-05-02T18:33:25 IST" duration-ms="6601" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:05 IST" name="tearDown" finished-at="2025-05-23T02:10:05 IST" duration-ms="379" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:13 IST" name="tearDown" finished-at="2025-05-23T02:10:13 IST" duration-ms="439" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="testCase05(java.lang.String)[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:13 IST" name="testCase05" description="Search for each of the items given in the stubs: src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s views reach 10 Cr." data-provider="excelData" finished-at="2025-05-23T02:10:24 IST" duration-ms="11122" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -60,11 +95,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase05 -->
-        <test-method is-config="true" signature="endTest()[pri:0, instance:testcases.TestCases@43015c69]" started-at="2025-05-02T18:33:25 IST" name="endTest" finished-at="2025-05-02T18:33:26 IST" duration-ms="1064" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:25 IST" name="tearDown" finished-at="2025-05-23T02:10:25 IST" duration-ms="403" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- endTest -->
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="flushReport()[pri:0, instance:testcases.TestCases@67389cb8]" started-at="2025-05-23T02:10:25 IST" name="flushReport" finished-at="2025-05-23T02:10:26 IST" duration-ms="565" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flushReport -->
       </class> <!-- testcases.TestCases -->
-    </test> <!-- Test Cases for Buildout -->
-  </suite> <!-- Test Suite for Buildout -->
+    </test> <!-- All Testcases -->
+  </suite> <!-- Test case suite for YouTube -->
 </testng-results>

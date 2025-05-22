@@ -8,12 +8,24 @@ repositories {
 
 dependencies {
 
-    testImplementation 'org.testng:testng:7.7.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.22.0'
 
-    implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation 'commons-io:commons-io:2.16.1'
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+    implementation group: 'org.testng', name: 'testng', version: '7.11.0'
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.24.3'
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.24.3'
+
+    // https://mvnrepository.com/artifact/com.aventstack/extentreports
+    implementation group: 'com.aventstack', name: 'extentreports', version: '5.1.2'
 
     implementation 'org.apache.poi:poi-ooxml:5.4.0'
-
 }
 
 test {
@@ -46,5 +58,5 @@ test {
 }
 
 application {
-    mainClass = 'demo.App'
+    mainClass = 'App'
 }
