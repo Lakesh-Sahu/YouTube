@@ -21,7 +21,7 @@ public class CommonMethods extends Base {
 
     public CommonMethods(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public boolean click(WebElement we) {
@@ -39,10 +39,11 @@ public class CommonMethods extends Base {
 
     public boolean sendKeys(WebElement we, String keyToSend) {
         try {
+            Thread.sleep(250);
             we.clear();
-            Thread.sleep(250);
+            Thread.sleep(500);
             we.sendKeys(keyToSend);
-            Thread.sleep(250);
+            Thread.sleep(500);
             return true;
         } catch (Exception e) {
             logWarningInExtentReport(e, "Exception while sending keys " + keyToSend);
@@ -54,6 +55,7 @@ public class CommonMethods extends Base {
     // Scroll to a particular element using java script executor
     public void scrollTO(WebElement element) {
         try {
+            Thread.sleep(300);
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView({behavior : 'smooth', block : 'center', inline : 'center'});", element);
         } catch (Exception e) {

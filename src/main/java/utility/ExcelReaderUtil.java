@@ -11,11 +11,11 @@ import java.util.List;
 
 public class ExcelReaderUtil {
 
-    public static Object[][] readExcelData(String fileName) {
+    public static Object[][] readSingleColumnExcelData(String fileName, String sheetName) {
         try {
             InputStream file = new DataInputStream(new FileInputStream(fileName));
             Workbook workbook = new XSSFWorkbook(file);
-            Sheet sheet = workbook.getSheetAt(0); // read the first sheet
+            Sheet sheet = workbook.getSheet(sheetName); // read the given sheet
 
             List<Object[]> records = new ArrayList<>();
             int rowNum = sheet.getFirstRowNum() + 1; // Skip the header row
@@ -33,7 +33,6 @@ public class ExcelReaderUtil {
 
             workbook.close();
             return records.toArray(new Object[0][]);
-
         } catch (Exception e) {
             return null;
         }
@@ -41,16 +40,15 @@ public class ExcelReaderUtil {
 
     // Find the last non-blank row in a sheet
     public static int findLastNonBlankRow(Sheet sheet) {
-        int lastNonBlankRowNum = -1;
         if (sheet != null) {
-            for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
+            for (int i = sheet.getLastRowNum(); i >= sheet.getFirstRowNum(); i--) {
                 Row row = sheet.getRow(i);
-                if (row != null && !isRowBlank(row)) {
-                    lastNonBlankRowNum = i;
+                if (!isRowBlank(row)) {
+                    return i;
                 }
             }
         }
-        return lastNonBlankRowNum;
+        return -1;
     }
 
     // Find the last non-blank column in a given row
@@ -69,6 +67,10 @@ public class ExcelReaderUtil {
 
     // Helper method to determine if a row is blank
     private static boolean isRowBlank(Row row) {
+        if (row == null || row.getFirstCellNum() < 0 || row.getLastCellNum() < 0) {
+            return true;
+        }
+
         for (int cellNum = row.getFirstCellNum(); cellNum < row.getLastCellNum(); cellNum++) {
             Cell cell = row.getCell(cellNum, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
             if (cell != null && cell.getCellType() != CellType.BLANK) {

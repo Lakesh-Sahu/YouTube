@@ -17,7 +17,7 @@ public class Music {
 
     public Music(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
         cm = new CommonMethods(this.driver);
     }
 

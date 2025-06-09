@@ -14,8 +14,10 @@ import java.util.Arrays;
 
 public class Base {
 
-    private static Logger log = LogManager.getLogger(Base.class);
+    private static final Logger log = LogManager.getLogger(Base.class);
     protected static String browserName;
+    protected static int maxThreadAllowed;
+    protected static boolean isFair;
 
     protected static ExtentSparkReporter sparkReporter;
     protected static ExtentReports reports;
@@ -23,13 +25,12 @@ public class Base {
     static String singleTimeStamp;
 
     @BeforeSuite(alwaysRun = true)
-    @Parameters("browser")
-    public void getBrowserName(String browser) {
+    @Parameters({"browser", "maxThreadAllowed", "isFair"})
+    public void extentReportInitializer(String browser, String maxThreadAllowed, String isFair) {
         browserName = browser;
-    }
+        Base.maxThreadAllowed = Integer.parseInt(maxThreadAllowed);
+        Base.isFair = Boolean.parseBoolean(isFair);
 
-    @BeforeSuite(alwaysRun = true, dependsOnMethods = "getBrowserName")
-    public void extentReportInitializer() {
         singleTimeStamp = String.valueOf(java.time.LocalDateTime.now()).replaceAll("[.:]", "");
 
         String filePath = System.getProperty("user.dir") + "/extent_reports/report_" + singleTimeStamp + ".html";
@@ -49,16 +50,16 @@ public class Base {
             reports.setSystemInfo("Environment Name", "Production");
             reports.setSystemInfo("Tester Name", "Lakesh Sahu");
             reports.setSystemInfo("OS", "Windows 11 Home Edition");
-            reports.setSystemInfo("Browser", browserName);
+            reports.setSystemInfo("Browser", browser);
         }
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         try {
-            if (ContextManager.getContext() != null && ContextManager.getContext().getDriver() != null) {
-                ContextManager.getContext().getDriver().quit();
-                ContextManager.remove();
+            if (ObjectManager.getContext() != null && ObjectManager.getContext().getDriver() != null) {
+                ObjectManager.getContext().getDriver().quit();
+                ObjectManager.remove();
             }
         } catch (Exception e) {
             logWarningInExtentReport(e, "Unable to tearDown");
@@ -114,7 +115,7 @@ public class Base {
 
     public static void logWarningInExtentReport(Exception e, String message) {
         try {
-            ObjectContext oc = ContextManager.getContext();
+            ObjectCreator oc = ObjectManager.getContext();
             String className = oc.getClassNameByUser();
             StringBuilder sb = new StringBuilder();
             StackTraceElement parent = null;
@@ -131,11 +132,11 @@ public class Base {
             }
             String callerInfo = sb.toString();
             sb.append(" ").append(message).append(" : ").append(getMessageFromException(e)).append(" - WARNING");
-            ContextManager.getContext().test.warning(sb.toString(), MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - WARN")).build());
+            ObjectManager.getContext().test.warning(sb.toString(), MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - WARN")).build());
 
         } catch (Exception ei) {
             String callerInfo = getCallerInfoFromStackTrace(ei.getStackTrace());
-            ContextManager.getContext().test.warning("Unable to log Warning in extent report", MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - WARN")).build());
+            ObjectManager.getContext().test.warning("Unable to log Warning in extent report", MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - WARN")).build());
             logExceptionInLog(Arrays.toString(e.getStackTrace()), "Unable to log Warning in extent report", e, Level.WARN);
         }
     }
@@ -160,17 +161,17 @@ public class Base {
 
     public static void logInfoInExtentReport(String message) {
         try {
-            ObjectContext oc = ContextManager.getContext();
+            ObjectCreator oc = ObjectManager.getContext();
             String className = oc.getClassNameByUser();
             String methodName = oc.getMethodNameByUser();
 
             StringBuilder sb = new StringBuilder();
             String callerInfo = sb.append(className).append(" ").append(methodName).toString();
             sb.append(" ").append(message).append(" - INFO");
-            ContextManager.getContext().test.info(sb.toString(), MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - INFO")).build());
+            oc.test.info(sb.toString(), MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - INFO")).build());
         } catch (Exception e) {
             String callerInfo = getCallerInfoFromStackTrace(e.getStackTrace());
-            ContextManager.getContext().test.warning("Unable to log Info in extent report", MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - WARN")).build());
+            ObjectManager.getContext().test.warning("Unable to log Info in extent report", MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo + " - WARN")).build());
             logExceptionInLog(Arrays.toString(e.getStackTrace()), "Unable to log Info in extent report", e, Level.WARN);
         }
     }

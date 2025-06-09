@@ -19,7 +19,7 @@ public class SearchResult {
 
     public SearchResult(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
         cm = new CommonMethods(this.driver);
     }
 
@@ -75,10 +75,10 @@ public class SearchResult {
                     return true;
 
                 // Storing the last position of rendered
-                totalElementRendered = views.size();
+                totalElementRendered += views.size();
 
                 // Scrolling to the last views element so that new section can render
-                cm.scrollTO(views.get(totalElementRendered - 1));
+                cm.scrollTO(views.get(views.size() - 1));
             }
         } catch (Exception e) {
             logWarningInExtentReport(e, "Exception while scrolling and counting view");
@@ -90,10 +90,17 @@ public class SearchResult {
     // Separating the Integer part from the view count
     public double intViewCountSeperator(String viewString) {
         try {
+            if(viewString == null || viewString.isBlank()) {
+                return 0;
+            }
+
             int i = 0;
             for (; i < viewString.length(); i++) {
                 if (!"0123456789.".contains(Character.toString(viewString.charAt(i))))
                     break;
+            }
+            if(i == 0) {
+                return 0;
             }
             return Double.parseDouble(viewString.substring(0, i));
 

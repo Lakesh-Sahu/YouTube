@@ -7,9 +7,9 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 
 import utility.Base;
-import utility.ContextManager;
+import utility.ObjectManager;
 import utility.ExcelDataProvider;
-import utility.ObjectContext;
+import utility.ObjectCreator;
 
 import static org.testng.Assert.*;
 
@@ -17,7 +17,7 @@ public class TestCases extends Base {
 
     @Test(enabled = true, description = "Go to https://www.youtube.com/ and Assert user is on the correct URL. Click on 'About' at the bottom of the sidebar, verify that it contains some message.")
     public void testCase01() {
-        ObjectContext oc = ContextManager.getContext();
+        ObjectCreator oc = ObjectManager.getContext();
 
         // Opening YouTube url
         assertTrue(oc.home.navigateToHome(), "User is able to open url");
@@ -40,15 +40,35 @@ public class TestCases extends Base {
         StringBuilder message = new StringBuilder();
         List<WebElement> textElements = oc.cm.findElementsVisi("//section[@class='ytabout__content']/*");
         for (WebElement currMessage : textElements) {
-           message.append(oc.cm.getText(currMessage)).append(" ");
+            message.append(oc.cm.getText(currMessage)).append(" ");
         }
         logInfoInExtentReport("About message contains some message : \"" + message.toString() + "\"");
         assertTrue(!message.toString().isBlank(), "About message contains some message : \"" + message.toString() + "\"");
     }
 
+    @Test(enabled = true, timeOut = 120000, dataProvider = "itemToSearchForTotalViewCount", dataProviderClass = ExcelDataProvider.class, description = "Search for each of the items given in the stubs: src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s views reach 10 Cr.")
+    public void testCase02(String text) {
+        ObjectCreator oc = ObjectManager.getContext();
+
+        logInfoInExtentReport("Performing action for '" + text + "' from excel data");
+
+        // Opening 'YouTube' url
+        assertTrue(oc.home.navigateToHome(), "User is able to open url");
+
+        // Asserting that user is on landing on correct url
+        assertEquals(oc.cm.getCurrentUrl(), "https://www.youtube.com/", "User is on https://www.youtube.com/ page");
+
+        // Searching for text provided by the dataProvider
+        assertTrue(oc.searchResult.search(text), "User is able to search in the search box");
+
+        // Scrolling until total view count of videos is greater than or equal to the targetViewCount
+        long viewCount = 100000000L;
+        assertTrue(oc.searchResult.scrollTillViewCount(viewCount), "User is able to scroll until it reached " + viewCount + " view count");
+    }
+
     @Test(enabled = true, description = "Go to the 'Films' or 'Movies' tab and in the 'Top Selling' section, scroll to the extreme right. Apply a Soft Assert on whether the movie is marked 'A' or 'U' or 'U/A' tag or not. Apply a Soft assert on the movie category to check if it exists ex: 'Comedy', 'Animation', 'Drama'.")
-    public void testCase02() {
-        ObjectContext oc = ContextManager.getContext();
+    public void testCase03() {
+        ObjectCreator oc = ObjectManager.getContext();
 
         // Opening YouTube url
         assertTrue(oc.home.navigateToHome(), "User is able to open url");
@@ -77,8 +97,8 @@ public class TestCases extends Base {
     }
 
     @Test(enabled = true, description = "Go to the 'Music' tab and in the 1st section, scroll to the last content of 1st section. Verify it contains some playlist name. Soft Assert on whether the number of tracks listed is less than or equal to 50.")
-    public void testCase03() {
-        ObjectContext oc = ContextManager.getContext();
+    public void testCase04() {
+        ObjectCreator oc = ObjectManager.getContext();
 
         // Creating object of 'SoftAssert'
         SoftAssert sa = new SoftAssert();
@@ -107,8 +127,8 @@ public class TestCases extends Base {
     }
 
     @Test(enabled = true, description = "Go to the 'News' tab and print the title and body of the 1st 3 'Latest News Posts' along with the sum of the number of likes on all 3 of them. No likes given means 0.")
-    public void testCase04() {
-        ObjectContext oc = ContextManager.getContext();
+    public void testCase05() {
+        ObjectCreator oc = ObjectManager.getContext();
 
         // Opening 'YouTube' url
         assertTrue(oc.home.navigateToHome(), "User is able to open url");
@@ -124,25 +144,5 @@ public class TestCases extends Base {
         String allNewsTitleBodyLike = oc.news.getTitleBodyLikesInLatestNewsPostCards(numberOfNews);
         logInfoInExtentReport("News in the latest news post :\n" + allNewsTitleBodyLike);
         assertTrue(!allNewsTitleBodyLike.isBlank(), "User is able to see " + numberOfNews + " news in the latest news post");
-    }
-
-    @Test(enabled = true, dataProvider = "excelData", dataProviderClass = ExcelDataProvider.class, description = "Search for each of the items given in the stubs: src/test/resources/data.xlsx, and keep scrolling till the sum of each video’s views reach 10 Cr.")
-    public void testCase05(String text) {
-        ObjectContext oc = ContextManager.getContext();
-
-        logInfoInExtentReport("Performing action for '" + text + "' from excel data");
-
-        // Opening 'YouTube' url
-        assertTrue(oc.home.navigateToHome(), "User is able to open url");
-
-        // Asserting that user is on landing on correct url
-        assertEquals(oc.cm.getCurrentUrl(), "https://www.youtube.com/", "User is on https://www.youtube.com/ page");
-
-        // Searching for text provided by the dataProvider
-        assertTrue(oc.searchResult.search(text), "User is able to search in the search box");
-
-        // Scrolling until total view count of videos is greater than or equal to the targetViewCount
-        long viewCount = 100000000L;
-        assertTrue(oc.searchResult.scrollTillViewCount(viewCount), "User is able to scroll until it reached " + viewCount + " view count");
     }
 }

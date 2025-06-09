@@ -9,52 +9,68 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.util.Arrays;
+
 public class Listener extends Base implements ITestListener {
     private static final Logger log = LogManager.getLogger(Listener.class);
-    String browser;
+    public static int count = 1;
 
     public void onTestStart(ITestResult result) {
+        ObjectManager.acquire();
+
         String className = result.getTestClass().getName();
         String methodName = result.getName();
         String description = result.getMethod().getDescription();
 
-        WebDriver driver = (new utility.DriverFactory()).getDriver(browser);
-        ContextManager.init(driver, className, methodName, description);
+        WebDriver driver = (new utility.DriverFactory()).getDriver(browserName);
+        ObjectManager.init(driver, className, methodName, description);
     }
 
     public void onTestSuccess(ITestResult result) {
-        String callerInfo = getCallerInfoFromITestResult(result, "PASSED");
+        try {
+            String callerInfo = getCallerInfoFromITestResult(result, "PASSED");
 
-        ContextManager.getContext().test.pass(callerInfo, MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo)).build());
+            ObjectManager.getContext().test.pass(callerInfo, MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo)).build());
+        } catch (Exception e) {
+            System.out.println("#####\nException in onTestSuccess method of Listener class\n" + Arrays.toString(e.getStackTrace()) + "\n#####");
+        } finally {
+            ObjectManager.release();
+            System.out.println("count : " + count++);}
     }
 
     public void onTestFailure(ITestResult result) {
-        String callerInfo = getCallerInfoFromITestResult(result, "FAILED");
-        String throwableCallerInfoMessage = "Error occurred : " + getThrowableCallerInfoMessageFromITestResult(result, "FAILED");
+        try {
+            String callerInfo = getCallerInfoFromITestResult(result, "FAILED");
+            String throwableCallerInfoMessage = "Error occurred : " + getThrowableCallerInfoMessageFromITestResult(result, "FAILED");
 
-        ContextManager.getContext().test.fail(throwableCallerInfoMessage, MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo)).build());
+            ObjectManager.getContext().test.fail(throwableCallerInfoMessage, MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo)).build());
 
-        logResultInLog(result, "FAILED");
+            logResultInLog(result, "FAILED");
+
+        } catch (Exception e) {
+            System.out.println("#####\nException in onTestFailure method of Listener class\n" + Arrays.toString(e.getStackTrace()) + "\n#####");
+        } finally {
+            ObjectManager.release();
+            System.out.println("count : " + count++);}
     }
 
     public void onTestSkipped(ITestResult result) {
         try {
-            String callerInfo = getCallerInfoFromITestResult(result, "SKIPPED");
             String throwableCallerInfoMessage = "Error occurred : " + getThrowableCallerInfoMessageFromITestResult(result, "SKIPPED");
 
-            ContextManager.getContext().test.skip(throwableCallerInfoMessage, MediaEntityBuilder.createScreenCaptureFromPath(Screenshot.capture(callerInfo)).build());
+            ObjectManager.getContext().test.skip(throwableCallerInfoMessage);
 
             logResultInLog(result, "SKIPPED");
         } catch (Exception e) {
-            System.out.println("##### Unable to call the getCallerInfo for the extent report #####");
-            logExceptionInLog(getCallerInfoFromStackTrace(Thread.currentThread().getStackTrace()), "Exception while logging in the ExtentReport or in log file", e, Level.WARN);
+            System.out.println("#####\nException in onTestSkipped method of Listener class\n" + Arrays.toString(e.getStackTrace()) + "\n#####");
+        } finally {
+            ObjectManager.release();
+            System.out.println("count : " + count++);
         }
     }
 
     public void onStart(ITestContext context) {
         log.info("##### Test Cases Started #####");
-
-        browser = browserName;
     }
 
     public void onFinish(ITestContext context) {

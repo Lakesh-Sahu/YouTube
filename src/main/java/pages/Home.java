@@ -1,6 +1,7 @@
 package pages;
 
 import org.apache.logging.log4j.Level;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,16 +18,17 @@ public class Home {
 
     // Home page url
     private final String url = "https://www.youtube.com/";
+    private final String url2 = "https://www.youtube.com/?themeRefresh=1";
 
     public Home(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
         cm = new CommonMethods(this.driver);
     }
 
     public boolean verifyOnHomePage() {
         try {
-            return wait.until(ExpectedConditions.urlToBe(url));
+            return wait.until(ExpectedConditions.or(ExpectedConditions.urlToBe(url), ExpectedConditions.urlToBe(url2)));
         } catch (Exception e) {
             logWarningInExtentReport(e, "Exception while verifying on Home Page");
             logExceptionInLog(getCallerInfoFromStackTrace(Thread.currentThread().getStackTrace()), "Exception while verifying on Home Page", e, Level.WARN);
@@ -68,10 +70,14 @@ public class Home {
 
     public boolean clickMoviesBtn() {
         try {
-            return cm.click(cm.findElementVisi("//yt-formatted-string[text()='Movies']"));
+            try {
+                return cm.click(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//yt-formatted-string[text()='Movies']"))));
+            } catch (Exception ignore) {
+            }
+            return cm.click(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//yt-formatted-string[text()='Films']"))));
         } catch (Exception e) {
-            logWarningInExtentReport(e, "Exception while clicking Movies button");
-            logExceptionInLog(getCallerInfoFromStackTrace(Thread.currentThread().getStackTrace()), "Exception while clicking Movies button", e, Level.WARN);
+            logWarningInExtentReport(e, "Exception while clicking Movies or Films button");
+            logExceptionInLog(getCallerInfoFromStackTrace(Thread.currentThread().getStackTrace()), "Exception while clicking Movies or Films button", e, Level.WARN);
             return false;
         }
     }
