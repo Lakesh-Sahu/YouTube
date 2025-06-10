@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="testcases.TestCases" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-06-09T17:44:32" hostname="LAKESH-LAPTOP" time="73.058">
+<testsuite name="testcases.TestCases" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-06-10T07:01:02" hostname="LAKESH-LAPTOP" time="74.363">
   <properties/>
-  <testcase name="testCase04" classname="testcases.TestCases" time="26.337"/>
-  <testcase name="testCase01" classname="testcases.TestCases" time="26.917"/>
-  <testcase name="testCase03" classname="testcases.TestCases" time="30.786"/>
-  <testcase name="testCase05" classname="testcases.TestCases" time="39.826"/>
-  <testcase name="testCase02[0](Kids Games)" classname="testcases.TestCases" time="51.942"/>
-  <testcase name="testCase02[0](Paper Art)" classname="testcases.TestCases" time="53.15"/>
-  <testcase name="testCase02[0](Indian Music)" classname="testcases.TestCases" time="55.899"/>
-  <testcase name="testCase02[0](AI)" classname="testcases.TestCases" time="68.441"/>
-  <testcase name="testCase02[0](Movie Trailer)" classname="testcases.TestCases" time="72.239"/>
+  <testcase name="testCase01" classname="testcases.TestCases" time="22.945"/>
+  <testcase name="testCase04" classname="testcases.TestCases" time="25.51"/>
+  <testcase name="testCase03" classname="testcases.TestCases" time="28.885"/>
+  <testcase name="testCase02[0](Paper Art)" classname="testcases.TestCases" time="50.779"/>
+  <testcase name="testCase02[0](Indian Music)" classname="testcases.TestCases" time="52.021"/>
+  <testcase name="testCase05" classname="testcases.TestCases" time="53.264"/>
+  <testcase name="testCase02[0](AI)" classname="testcases.TestCases" time="65.353"/>
+  <testcase name="testCase02[0](Kids Games)" classname="testcases.TestCases" time="70.172"/>
+  <testcase name="testCase02[0](Movie Trailer)" classname="testcases.TestCases" time="73.467"/>
   <system-out><![CDATA[count : 1
 count : 2
 count : 3
@@ -20,41 +20,41 @@ count : 7
 count : 8
 count : 9
 ]]></system-out>
-  <system-err><![CDATA[Jun 09, 2025 11:14:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+  <system-err><![CDATA[Jun 10, 2025 12:31:04 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
-WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
-WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:14:35 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
-WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:15:02 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:15:02 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:15:02 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:15:02 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:15:06 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:15:06 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Jun 10, 2025 12:31:04 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:15:16 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Jun 10, 2025 12:31:29 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:15:16 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Jun 10, 2025 12:31:29 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Jun 09, 2025 11:15:28 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Jun 10, 2025 12:31:30 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 137
-Jun 09, 2025 11:15:28 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Jun 10, 2025 12:31:30 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+Jun 10, 2025 12:31:33 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 137
+Jun 10, 2025 12:31:33 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+Jun 10, 2025 12:31:57 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 137
+Jun 10, 2025 12:31:57 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+Jun 10, 2025 12:31:57 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 137
+Jun 10, 2025 12:31:57 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 137.0.7151.69. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.22.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
 </testsuite>

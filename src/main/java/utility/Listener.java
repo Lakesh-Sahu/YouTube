@@ -13,7 +13,6 @@ import java.util.Arrays;
 
 public class Listener extends Base implements ITestListener {
     private static final Logger log = LogManager.getLogger(Listener.class);
-    public static int count = 1;
 
     public void onTestStart(ITestResult result) {
         ObjectManager.acquire();
@@ -35,7 +34,7 @@ public class Listener extends Base implements ITestListener {
             System.out.println("#####\nException in onTestSuccess method of Listener class\n" + Arrays.toString(e.getStackTrace()) + "\n#####");
         } finally {
             ObjectManager.release();
-            System.out.println("count : " + count++);}
+        }
     }
 
     public void onTestFailure(ITestResult result) {
@@ -51,7 +50,7 @@ public class Listener extends Base implements ITestListener {
             System.out.println("#####\nException in onTestFailure method of Listener class\n" + Arrays.toString(e.getStackTrace()) + "\n#####");
         } finally {
             ObjectManager.release();
-            System.out.println("count : " + count++);}
+        }
     }
 
     public void onTestSkipped(ITestResult result) {
@@ -65,7 +64,6 @@ public class Listener extends Base implements ITestListener {
             System.out.println("#####\nException in onTestSkipped method of Listener class\n" + Arrays.toString(e.getStackTrace()) + "\n#####");
         } finally {
             ObjectManager.release();
-            System.out.println("count : " + count++);
         }
     }
 
